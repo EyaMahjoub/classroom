@@ -16,3 +16,4 @@ final class Main2Controller extends AbstractController
         ]);
     }
 }
+
