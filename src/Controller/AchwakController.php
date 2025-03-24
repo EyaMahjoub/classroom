@@ -6,12 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-final class Main3Controller extends AbstractController{
-    #[Route('/main3', name: 'app_main3')]
+final class AchwakController extends AbstractController
+{
+    #[Route('/achwak', name: 'app_achwak')]
     public function index(): Response
     {
-        return $this->render('main3/index.html.twig', [
-            'controller_name' => 'Main3Controller',
+        return $this->render('achwak/index.html.twig', [
+            'controller_name' => 'AchwakController',
         ]);
     }
 }
