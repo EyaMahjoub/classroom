@@ -11,7 +11,6 @@ final class TesstController extends AbstractController
     #[Route('/tesst', name: 'app_tesst')]
     public function index(): Response
     {
-        return $this->render('tesst/index.html.twig', ['salut'=>"saluttttt" 
-        ]);
+        return $this->render('tesst/index.html.twig', ['salut'=>"saluttttt"         ]);
     }
 }
