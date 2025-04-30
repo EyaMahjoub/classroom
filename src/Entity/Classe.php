@@ -46,10 +46,17 @@ class Classe
     #[ORM\ManyToOne(inversedBy: 'classes')]
     private ?enseignant $enseignant = null;
 
+    /**
+     * @var Collection<int, Etudiant>
+     */
+    #[ORM\ManyToMany(targetEntity: Etudiant::class, inversedBy: 'classes')]
+    private Collection $Etudiant;
+
     public function __construct()
     {
         $this->fichier = new ArrayCollection();
         $this->cours = new ArrayCollection();
+        $this->Etudiant = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -185,6 +192,30 @@ class Classe
     public function setEnseignant(?enseignant $enseignant): static
     {
         $this->enseignant = $enseignant;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Etudiant>
+     */
+    public function getEtudiant(): Collection
+    {
+        return $this->Etudiant;
+    }
+
+    public function addEtudiant(Etudiant $etudiant): static
+    {
+        if (!$this->Etudiant->contains($etudiant)) {
+            $this->Etudiant->add($etudiant);
+        }
+
+        return $this;
+    }
+
+    public function removeEtudiant(Etudiant $etudiant): static
+    {
+        $this->Etudiant->removeElement($etudiant);
 
         return $this;
     }

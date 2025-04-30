@@ -27,6 +27,15 @@ class Devoire
     #[ORM\OneToMany(targetEntity: soumissionDevoire::class, mappedBy: 'devoire')]
     private Collection $soumissionDevoire;
 
+    #[ORM\Column(length: 255)]
+    private ?string $title = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $deadline = null;
+
     public function __construct()
     {
         $this->cours = new ArrayCollection();
@@ -94,6 +103,42 @@ class Devoire
                 $soumissionDevoire->setDevoire(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): static
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getDeadline(): ?\DateTimeImmutable
+    {
+        return $this->deadline;
+    }
+
+    public function setDeadline(\DateTimeImmutable $deadline): static
+    {
+        $this->deadline = $deadline;
 
         return $this;
     }

@@ -57,12 +57,19 @@ class Etudiant
     #[ORM\OneToMany(targetEntity: soumissionDevoire::class, mappedBy: 'etudiant')]
     private Collection $soumissionDevoire;
 
+    /**
+     * @var Collection<int, Classe>
+     */
+    #[ORM\ManyToMany(targetEntity: Classe::class, mappedBy: 'Etudiant')]
+    private Collection $classes;
+
     public function __construct()
     {
         $this->inscription = new ArrayCollection();
         $this->commentaire = new ArrayCollection();
         $this->notification = new ArrayCollection();
         $this->soumissionDevoire = new ArrayCollection();
+        $this->classes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -257,6 +264,33 @@ class Etudiant
             if ($soumissionDevoire->getEtudiant() === $this) {
                 $soumissionDevoire->setEtudiant(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Classe>
+     */
+    public function getClasses(): Collection
+    {
+        return $this->classes;
+    }
+
+    public function addClass(Classe $class): static
+    {
+        if (!$this->classes->contains($class)) {
+            $this->classes->add($class);
+            $class->addEtudiant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClass(Classe $class): static
+    {
+        if ($this->classes->removeElement($class)) {
+            $class->removeEtudiant($this);
         }
 
         return $this;
