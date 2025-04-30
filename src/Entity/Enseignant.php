@@ -42,19 +42,19 @@ class Enseignant
     /**
      * @var Collection<int, inscription>
      */
-    #[ORM\OneToMany(targetEntity: inscription::class, mappedBy: 'enseignant')]
+    #[ORM\OneToMany(targetEntity: Inscription::class, mappedBy: 'enseignant')]
     private Collection $inscription;
 
     /**
      * @var Collection<int, commentaire>
      */
-    #[ORM\OneToMany(targetEntity: commentaire::class, mappedBy: 'enseignant')]
+    #[ORM\OneToMany(targetEntity: Commentaire::class, mappedBy: 'enseignant')]
     private Collection $commentaire;
 
     /**
      * @var Collection<int, notification>
      */
-    #[ORM\OneToMany(targetEntity: notification::class, mappedBy: 'enseignant')]
+    #[ORM\OneToMany(targetEntity: Notification::class, mappedBy: 'enseignant')]
     private Collection $notification;
 
     public function __construct()
@@ -180,7 +180,7 @@ class Enseignant
         return $this->inscription;
     }
 
-    public function addInscription(inscription $inscription): static
+    public function addInscription(Inscription $inscription): static
     {
         if (!$this->inscription->contains($inscription)) {
             $this->inscription->add($inscription);
@@ -190,7 +190,7 @@ class Enseignant
         return $this;
     }
 
-    public function removeInscription(inscription $inscription): static
+    public function removeInscription(Inscription $inscription): static
     {
         if ($this->inscription->removeElement($inscription)) {
             // set the owning side to null (unless already changed)
@@ -210,7 +210,7 @@ class Enseignant
         return $this->commentaire;
     }
 
-    public function addCommentaire(commentaire $commentaire): static
+    public function addCommentaire(Commentaire $commentaire): static
     {
         if (!$this->commentaire->contains($commentaire)) {
             $this->commentaire->add($commentaire);
@@ -220,7 +220,7 @@ class Enseignant
         return $this;
     }
 
-    public function removeCommentaire(commentaire $commentaire): static
+    public function removeCommentaire(Commentaire $commentaire): static
     {
         if ($this->commentaire->removeElement($commentaire)) {
             // set the owning side to null (unless already changed)
@@ -240,7 +240,7 @@ class Enseignant
         return $this->notification;
     }
 
-    public function addNotification(notification $notification): static
+    public function addNotification(Notification $notification): static
     {
         if (!$this->notification->contains($notification)) {
             $this->notification->add($notification);
@@ -250,7 +250,7 @@ class Enseignant
         return $this;
     }
 
-    public function removeNotification(notification $notification): static
+    public function removeNotification(Notification $notification): static
     {
         if ($this->notification->removeElement($notification)) {
             // set the owning side to null (unless already changed)

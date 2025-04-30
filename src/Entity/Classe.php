@@ -7,6 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Fichier;
+use App\Entity\Cours;
+use App\Entity\Enseignant;
 
 #[ORM\Entity(repositoryClass: ClasseRepository::class)]
 class Classe
@@ -44,7 +47,7 @@ class Classe
     private Collection $cours;
 
     #[ORM\ManyToOne(inversedBy: 'classes')]
-    private ?enseignant $enseignant = null;
+    private ?Enseignant $enseignant = null;
 
     /**
      * @var Collection<int, Etudiant>
@@ -132,7 +135,7 @@ class Classe
         return $this->fichier;
     }
 
-    public function addFichier(fichier $fichier): static
+    public function addFichier(Fichier $fichier): static
     {
         if (!$this->fichier->contains($fichier)) {
             $this->fichier->add($fichier);
@@ -142,7 +145,7 @@ class Classe
         return $this;
     }
 
-    public function removeFichier(fichier $fichier): static
+    public function removeFichier(Fichier $fichier): static
     {
         if ($this->fichier->removeElement($fichier)) {
             // set the owning side to null (unless already changed)
@@ -162,7 +165,7 @@ class Classe
         return $this->cours;
     }
 
-    public function addCour(cours $cour): static
+    public function addCour(Cours $cour): static
     {
         if (!$this->cours->contains($cour)) {
             $this->cours->add($cour);
@@ -172,7 +175,7 @@ class Classe
         return $this;
     }
 
-    public function removeCour(cours $cour): static
+    public function removeCour(Cours $cour): static
     {
         if ($this->cours->removeElement($cour)) {
             // set the owning side to null (unless already changed)
@@ -184,12 +187,12 @@ class Classe
         return $this;
     }
 
-    public function getEnseignant(): ?enseignant
+    public function getEnseignant(): ?Enseignant
     {
         return $this->enseignant;
     }
 
-    public function setEnseignant(?enseignant $enseignant): static
+    public function setEnseignant(?Enseignant $enseignant): static
     {
         $this->enseignant = $enseignant;
 

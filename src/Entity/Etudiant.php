@@ -36,25 +36,25 @@ class Etudiant
     /**
      * @var Collection<int, inscription>
      */
-    #[ORM\OneToMany(targetEntity: inscription::class, mappedBy: 'etudiant')]
+    #[ORM\OneToMany(targetEntity: Inscription::class, mappedBy: 'etudiant')]
     private Collection $inscription;
 
     /**
      * @var Collection<int, commentaire>
      */
-    #[ORM\OneToMany(targetEntity: commentaire::class, mappedBy: 'etudiant')]
+    #[ORM\OneToMany(targetEntity: Commentaire::class, mappedBy: 'etudiant')]
     private Collection $commentaire;
 
     /**
      * @var Collection<int, notification>
      */
-    #[ORM\OneToMany(targetEntity: notification::class, mappedBy: 'etudiant')]
+    #[ORM\OneToMany(targetEntity: Notification::class, mappedBy: 'etudiant')]
     private Collection $notification;
 
     /**
      * @var Collection<int, soumissionDevoire>
      */
-    #[ORM\OneToMany(targetEntity: soumissionDevoire::class, mappedBy: 'etudiant')]
+    #[ORM\OneToMany(targetEntity: SoumissionDevoire::class, mappedBy: 'etudiant')]
     private Collection $soumissionDevoire;
 
     /**
@@ -157,7 +157,7 @@ class Etudiant
         return $this->inscription;
     }
 
-    public function addInscription(inscription $inscription): static
+    public function addInscription(Inscription $inscription): static
     {
         if (!$this->inscription->contains($inscription)) {
             $this->inscription->add($inscription);
@@ -167,7 +167,7 @@ class Etudiant
         return $this;
     }
 
-    public function removeInscription(inscription $inscription): static
+    public function removeInscription(Inscription $inscription): static
     {
         if ($this->inscription->removeElement($inscription)) {
             // set the owning side to null (unless already changed)
@@ -187,7 +187,7 @@ class Etudiant
         return $this->commentaire;
     }
 
-    public function addCommentaire(commentaire $commentaire): static
+    public function addCommentaire(Commentaire $commentaire): static
     {
         if (!$this->commentaire->contains($commentaire)) {
             $this->commentaire->add($commentaire);
@@ -197,7 +197,7 @@ class Etudiant
         return $this;
     }
 
-    public function removeCommentaire(commentaire $commentaire): static
+    public function removeCommentaire(Commentaire $commentaire): static
     {
         if ($this->commentaire->removeElement($commentaire)) {
             // set the owning side to null (unless already changed)
@@ -217,7 +217,7 @@ class Etudiant
         return $this->notification;
     }
 
-    public function addNotification(notification $notification): static
+    public function addNotification(Notification $notification): static
     {
         if (!$this->notification->contains($notification)) {
             $this->notification->add($notification);
@@ -227,7 +227,7 @@ class Etudiant
         return $this;
     }
 
-    public function removeNotification(notification $notification): static
+    public function removeNotification(Notification $notification): static
     {
         if ($this->notification->removeElement($notification)) {
             // set the owning side to null (unless already changed)
@@ -247,7 +247,7 @@ class Etudiant
         return $this->soumissionDevoire;
     }
 
-    public function addSoumissionDevoire(soumissionDevoire $soumissionDevoire): static
+    public function addSoumissionDevoire(SoumissionDevoire $soumissionDevoire): static
     {
         if (!$this->soumissionDevoire->contains($soumissionDevoire)) {
             $this->soumissionDevoire->add($soumissionDevoire);
@@ -257,7 +257,7 @@ class Etudiant
         return $this;
     }
 
-    public function removeSoumissionDevoire(soumissionDevoire $soumissionDevoire): static
+    public function removeSoumissionDevoire(SoumissionDevoire $soumissionDevoire): static
     {
         if ($this->soumissionDevoire->removeElement($soumissionDevoire)) {
             // set the owning side to null (unless already changed)
