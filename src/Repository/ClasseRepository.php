@@ -40,4 +40,12 @@ class ClasseRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+public function findByEnseignant($enseignantId)
+{
+    return $this->createQueryBuilder('c')
+        ->andWhere('c.enseignant = :enseignantId')
+        ->setParameter('enseignantId', $enseignantId)
+        ->getQuery()
+        ->getResult();
+}
 }

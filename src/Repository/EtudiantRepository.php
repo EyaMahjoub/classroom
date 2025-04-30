@@ -40,4 +40,17 @@ class EtudiantRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+public function findEtudiantsByEnseignant($enseignantId)
+{
+    return $this->getEntityManager()
+        ->createQuery(
+            'SELECT e
+             FROM App\Entity\Etudiant e
+             JOIN e.inscriptions i
+             JOIN i.enseignant ens
+             WHERE ens.id = :enseignantId'
+        )
+        ->setParameter('enseignantId', $enseignantId)
+        ->getResult();
+}
 }

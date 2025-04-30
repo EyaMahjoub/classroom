@@ -12,10 +12,10 @@ use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
 final class EnginantController extends AbstractController
 {
-    #[Route('/api/enginant', name: 'app_enginant')]
-    public function index(ClasseRepository $rep, SerializerInterface $serializer): JsonResponse
+    #[Route('/api/enginant/{id}', name: 'app_enginant')]
+    public function index($id,ClasseRepository $rep, SerializerInterface $serializer): JsonResponse
     {
-        $classes = $rep->findAll();
+        $classes = $rep->findByEnseignant($id);
     
         $data = $serializer->serialize($classes, 'json', [
             'circular_reference_handler' => function ($object) {
