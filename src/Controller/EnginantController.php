@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Controller;
+use Symfony\Component\Serializer\SerializerInterface;
+use App\Entity\Classe;
 use App\Repository\ClasseRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpClient\Response\JsonMockResponse;
@@ -11,14 +13,20 @@ use Doctrine\ORM\EntityManagerInterface;
 final class EnginantController extends AbstractController
 {
     #[Route('/api/enginant', name: 'app_enginant')]
-    public function index(): JsonResponse
+    public function index(ClasseRepository $rep, SerializerInterface $serializer): JsonResponse
     {
-        $enginants=[
-            ['id'=>1,'name'=>'Enginants A'],
-            ['id' => 2, 'name' => 'Enginant B'],
-        ];
-      return $this->json( $enginants);
+        $classes = $rep->findAll();
+    
+        $data = $serializer->serialize($classes, 'json', [
+            'circular_reference_handler' => function ($object) {
+                return $object->getId(); // retourne juste l'id au lieu de boucler
+            },
+        ]);
+    
+        return new JsonResponse($data, 200, [], true); // le dernier "true" indique que la donnée est déjà du JSON
     }
+    
+    
 
 
 }
