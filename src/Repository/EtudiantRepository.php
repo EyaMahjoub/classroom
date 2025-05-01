@@ -40,17 +40,17 @@ class EtudiantRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-public function findEtudiantsByEnseignant($enseignantId)
+
+public function findByEnseignant(int $enseignantId): array
 {
-    return $this->getEntityManager()
-        ->createQuery(
-            'SELECT e
-             FROM App\Entity\Etudiant e
-             JOIN e.inscriptions i
-             JOIN i.enseignant ens
-             WHERE ens.id = :enseignantId'
-        )
+    return $this->createQueryBuilder('e')
+        ->join('e.classes', 'c')  // Jointure entre Etudiant et Classe via la table de jointure
+        ->join('c.enseignant', 'ens')  // Jointure entre Classe et Enseignant
+        ->andWhere('ens.id = :enseignantId')  // Filtre par l'ID de l'enseignant
         ->setParameter('enseignantId', $enseignantId)
+        ->select('e.nom', 'e.prenom', 'e.email', 'e.imageProfile', 'c.nom AS classe')
+        ->getQuery()
         ->getResult();
 }
+
 }

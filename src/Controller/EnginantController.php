@@ -4,6 +4,7 @@ namespace App\Controller;
 use Symfony\Component\Serializer\SerializerInterface;
 use App\Entity\Classe;
 use App\Repository\ClasseRepository;
+use App\Repository\EtudiantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpClient\Response\JsonMockResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -26,7 +27,15 @@ final class EnginantController extends AbstractController
         return new JsonResponse($data, 200, [], true); // le dernier "true" indique que la donnée est déjà du JSON
     }
     
+    #[Route('/api/enseignants/{id}/etudiants', name: 'api_enseignant_etudiants', methods: ['GET'])]
+    public function getEtudiantsByEnseignant(
+        int $id,
+        EtudiantRepository $etudiantRepository
+    ): JsonResponse {
+        $etudiants = $etudiantRepository->findByEnseignant($id);
     
+        return $this->json($etudiants);
+    }
 
 
 }
