@@ -40,4 +40,16 @@ class CoursRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+public function findCoursByEnseignant($id)
+{
+    return $this->createQueryBuilder('c')
+        ->select('c.titre', 'c.description', 'c.createdAt', 'cl.nom')
+        ->join('c.classe', 'cl')                // relation vers Classe
+        ->join('cl.enseignant', 'e')            // relation vers Enseignant
+        ->where('e.id = :id')
+        ->setParameter('id', $id)
+        ->getQuery()
+        ->getArrayResult(); // ou ->getResult() si tu veux des objets
+}
+
 }

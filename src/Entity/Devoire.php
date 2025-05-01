@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use App\Entity\SoumissionDevoire;
 use App\Repository\DevoireRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -85,7 +85,7 @@ class Devoire
         return $this->soumissionDevoire;
     }
 
-    public function addSoumissionDevoire(soumissionDevoire $soumissionDevoire): static
+    public function addSoumissionDevoire(SoumissionDevoire $soumissionDevoire): static
     {
         if (!$this->soumissionDevoire->contains($soumissionDevoire)) {
             $this->soumissionDevoire->add($soumissionDevoire);
@@ -95,7 +95,7 @@ class Devoire
         return $this;
     }
 
-    public function removeSoumissionDevoire(soumissionDevoire $soumissionDevoire): static
+    public function removeSoumissionDevoire(SoumissionDevoire $soumissionDevoire): static
     {
         if ($this->soumissionDevoire->removeElement($soumissionDevoire)) {
             // set the owning side to null (unless already changed)
