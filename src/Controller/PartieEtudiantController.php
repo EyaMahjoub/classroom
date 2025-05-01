@@ -22,7 +22,8 @@ final class PartieEtudiantController extends AbstractController
                 'id' => $classe->getId(),
                 'nom' => $classe->getNom(),
                 'description'=>$classe->getDescription(),
-                'creation'=>$classe->getCreatedAt()
+                'creation'=>$classe->getCreatedAt(),
+                'image'=>$classe->getImage()
             ];
         }
 
