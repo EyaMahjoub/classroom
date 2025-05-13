@@ -178,7 +178,10 @@ class Etudiant
 
         return $this;
     }
-
+ public function getThreeInscribedClasses(): array
+    {
+        return array_slice($this->classes->toArray(), 0, 3);
+    }
     /**
      * @return Collection<int, commentaire>
      */
