@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Entity;
+
+use App\Entity\Cours;
 use App\Entity\SoumissionDevoire;
 use App\Repository\DevoireRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,15 +18,15 @@ class Devoire
     private ?int $id = null;
 
     /**
-     * @var Collection<int, cours>
+     * @var Collection<int, Cours>
      */
-    #[ORM\OneToMany(targetEntity: cours::class, mappedBy: 'devoire')]
+    #[ORM\OneToMany(targetEntity: Cours::class, mappedBy: 'devoire')]
     private Collection $cours;
 
     /**
-     * @var Collection<int, soumissionDevoire>
+     * @var Collection<int, SoumissionDevoire>
      */
-    #[ORM\OneToMany(targetEntity: soumissionDevoire::class, mappedBy: 'devoire')]
+    #[ORM\OneToMany(targetEntity: SoumissionDevoire::class, mappedBy: 'devoire')]
     private Collection $soumissionDevoire;
 
     #[ORM\Column(length: 255)]
@@ -48,14 +50,14 @@ class Devoire
     }
 
     /**
-     * @return Collection<int, cours>
+     * @return Collection<int, Cours>
      */
     public function getCours(): Collection
     {
         return $this->cours;
     }
 
-    public function addCour(cours $cour): static
+    public function addCour(Cours $cour): static
     {
         if (!$this->cours->contains($cour)) {
             $this->cours->add($cour);
@@ -65,7 +67,7 @@ class Devoire
         return $this;
     }
 
-    public function removeCour(cours $cour): static
+    public function removeCour(Cours $cour): static
     {
         if ($this->cours->removeElement($cour)) {
             // set the owning side to null (unless already changed)
@@ -78,7 +80,7 @@ class Devoire
     }
 
     /**
-     * @return Collection<int, soumissionDevoire>
+     * @return Collection<int, SoumissionDevoire>
      */
     public function getSoumissionDevoire(): Collection
     {

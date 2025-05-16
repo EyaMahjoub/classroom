@@ -40,4 +40,19 @@ class CommentaireRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+// src/Repository/CommentaireRepository.php
+
+public function findCommentairesByClasseId(int $classeId): array
+{
+    return $this->createQueryBuilder('c')
+        ->leftJoin('c.enseignant', 'e')
+        ->leftJoin('e.classes', 'ce')
+        ->leftJoin('c.etudiant', 'et')
+        ->leftJoin('et.classes', 'cet')
+        ->where('ce.id = :id OR cet.id = :id')
+        ->setParameter('id', $classeId)
+        ->getQuery()
+        ->getResult();
+}
+
 }
